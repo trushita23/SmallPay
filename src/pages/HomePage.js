@@ -19,7 +19,7 @@ const HomePage = (props) => {
         <SideBar />
       </Grid>
       <Grid item xs={12}>
-        <AddCustomer />
+        <AddCustomer userInfo={auth.user?.profile?.email} />
       </Grid>
     </Grid>
   ) : (
