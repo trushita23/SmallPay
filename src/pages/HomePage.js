@@ -1,4 +1,3 @@
-import React from "react";
 import { Grid } from "@mui/material";
 import NavBar from "../containers/NavBar";
 import AddCustomer from "../containers/AddCustomer";

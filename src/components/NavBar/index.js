@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -90,7 +89,7 @@ export default function NavBarComp(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Invoicify
+            SmallPay
           </Typography>
           <Button color="inherit">
             {userId ? (

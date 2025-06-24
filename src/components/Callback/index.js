@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useAuth } from "react-oidc-context";
 import { useHistory } from "react-router-dom";
 

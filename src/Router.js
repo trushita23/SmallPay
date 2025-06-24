@@ -1,4 +1,4 @@
-import React, { Suspense, useContext, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Loader from "./components/Loader";
 import { CssBaseline } from "@mui/material";
@@ -13,7 +13,6 @@ const SpecificInvoicePage = React.lazy(() =>
   import("./pages/SpecificInvoicePage")
 );
 
-// const NavBar = React.lazy(() => import("./containers/NavBar"));
 const Dashboard = React.lazy(() => import("./containers/Dashboard"));
 const Invoice = React.lazy(() => import("./containers/Invoice"));
 const InvoiceList = React.lazy(() => import("./containers/InvoiceList"));
