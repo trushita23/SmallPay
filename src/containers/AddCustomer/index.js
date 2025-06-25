@@ -1,7 +1,5 @@
 import AddCustomerComp from "../../components/AddCustomer";
 
-import AddCustomerComp from "../../components/AddCustomer";
-
 function AddCustomer(props) {
   return (
     <>
