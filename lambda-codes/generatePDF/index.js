@@ -3,8 +3,9 @@ const AWS = require("aws-sdk");
 
 const s3 = new AWS.S3();
 var sqs = new AWS.SQS();
-var queueURL =
-  "https://sqs.us-east-1.amazonaws.com/092337985503/generatePdfQueue";
+var SQS_URL = "https://sqs.us-east-2.amazonaws.com/665802315873";
+var queueURL = `${SQS_URL}/generatePdfQueue`;
+var PDF_S3_URL = "";
 
 const generatePDF = async (text) => {
   return new Promise((resolve) => {
@@ -126,8 +127,7 @@ const savePDF = async (key, pdf) => {
 //   return response;
 // };
 
-const generateURI = (keyValue) =>
-  `https://invoice-pdfsss.s3.us-east-1.amazonaws.com/${keyValue}`;
+const generateURI = (keyValue) => `${PDF_S3_URL}/${keyValue}`;
 
 exports.handler = async (event, context) => {
   let sqsContent = "";
