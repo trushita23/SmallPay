@@ -1,9 +1,9 @@
 import AddCustomerComp from "../../components/AddCustomer";
 
-function AddCustomer(props) {
+function AddCustomer() {
   return (
     <>
-      <AddCustomerComp {...props} />
+      <AddCustomerComp />
     </>
   );
 }
