@@ -1,6 +1,6 @@
 var AWS = require("aws-sdk");
 var sqs = new AWS.SQS();
-var SQS_URL = "";
+var SQS_URL = "https://sqs.us-east-2.amazonaws.com/665802315873";
 
 exports.handler = async (event) => {
   const req = JSON.stringify(event.invoiceNumber);

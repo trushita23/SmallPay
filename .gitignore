@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+lambda-codes/**/node_modules
+lambda-codes/*.zip
 /.pnp
 .pnp.js
 
