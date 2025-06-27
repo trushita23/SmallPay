@@ -4,7 +4,7 @@ import boto3
 
 def lambda_handler(event, context):
     s3 = boto3.client("s3")
-    bucket_name = "invoice-pdfss"
+    bucket_name = "smallpay-pdf-bucket"
     file_name = event["queryStringParameters"]["invoiceNumber"] + ".pdf"
     fileObj = s3.get_object(Bucket=bucket_name, Key=file_name)
     file_content = fileObj["Body"].read()
