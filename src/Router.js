@@ -29,8 +29,8 @@ function Router() {
   //       .catch((err) => console.error("User fetch failed", err));
   //   }
   // }, [auth.isAuthenticated]);
-  // const userInfo = { email: auth.user.profile.email };
-  const userInfo = { email: "nishitdummy@gmail.com" };
+  const userInfo = { email: auth.user.profile.email };
+  // const userInfo = { email: "nishitdummy@gmail.com" };
 
   if (auth.isLoading) return <Loader />;
 
