@@ -2,10 +2,10 @@ const PDFKit = require("pdfkit");
 const AWS = require("aws-sdk");
 
 const s3 = new AWS.S3();
-var sqs = new AWS.SQS();
-var SQS_URL = "https://sqs.us-east-2.amazonaws.com/665802315873";
-var queueURL = `${SQS_URL}/generatePdfQueue`;
-var PDF_S3_URL = "";
+// var sqs = new AWS.SQS();
+// var SQS_URL = "https://sqs.us-east-2.amazonaws.com/665802315873";
+// var queueURL = `${SQS_URL}/generatePdfQueue`;
+var PDF_S3_URL = "https://smallpay-pdf-bucket.s3.us-east-2.amazonaws.com";
 
 const generatePDF = async (text) => {
   return new Promise((resolve) => {
@@ -91,7 +91,7 @@ const savePDF = async (key, pdf) => {
   return await new Promise((resolve) => {
     s3.putObject(
       {
-        Bucket: "invoice-pdfsss",
+        Bucket: "smallpay-pdf-bucket",
         Key: key,
         Body: pdf,
         ContentType: "application/pdf",

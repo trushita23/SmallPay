@@ -20,16 +20,17 @@ const CustomerList = React.lazy(() => import("./containers/CustomerList"));
 
 function Router() {
   const auth = useAuth();
-  const [userInfo, setUserInfo] = useState({});
-
-  useEffect(() => {
-    if (auth.isAuthenticated && auth.user?.profile?.email) {
-      axios
-        .get(`${BACKEND_URL}/fetchUser?username=${auth.user.profile.email}`)
-        .then((res) => setUserInfo(res.data.data))
-        .catch((err) => console.error("User fetch failed", err));
-    }
-  }, [auth.isAuthenticated]);
+  // const [userInfo, setUserInfo] = useState({});
+  // useEffect(() => {
+  //   if (auth.isAuthenticated && auth.user?.profile?.email) {
+  //     axios
+  //       .get(`${BACKEND_URL}/fetchUser?username=${auth.user.profile.email}`)
+  //       .then((res) => setUserInfo(res.data.data))
+  //       .catch((err) => console.error("User fetch failed", err));
+  //   }
+  // }, [auth.isAuthenticated]);
+  // const userInfo = { email: auth.user.profile.email };
+  const userInfo = { email: "nishitdummy@gmail.com" };
 
   if (auth.isLoading) return <Loader />;
 

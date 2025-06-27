@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import SideBar from "../../components/SideBar";
 import DashboardComp from "../../components/Dashboard";
 import axios from "axios";
-import Charts from "../Charts";
+// import Charts from "../Charts";
 // import Fab from "@mui/material/Fab";
 import { Fab, Action } from "react-tiny-fab";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -37,6 +37,11 @@ const Dashboard = (props) => {
   };
 
   const { userInfo } = props;
+  console.log("userinfoo in dashboard container....", userInfo);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const fetchData = () => {
     const api = `${BACKEND_URL}/fetchInvoice?userID=${userInfo.email}`;
     axios
@@ -48,9 +53,6 @@ const Dashboard = (props) => {
         console.log(error);
       });
   };
-  if (data.length === 0) {
-    fetchData();
-  }
 
   const paidStatus_count = (type) => {
     let count = 0;
@@ -135,7 +137,7 @@ const Dashboard = (props) => {
       <Grid item xs={12} lg={3}></Grid>
       <Grid item xs={12} lg={9}>
         <Box pl={2} pt={2}>
-          <Charts data={data} />
+          {/* <Charts data={data} /> */}
         </Box>
       </Grid>
       <Grid item xs={12}>
