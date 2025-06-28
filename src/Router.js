@@ -6,6 +6,8 @@ import axios from "axios";
 import { BACKEND_URL } from "./config";
 import { useAuth } from "react-oidc-context";
 import Callback from "./components/Callback";
+import Welcome from "./components/Welcome";
+
 
 //imports are lazy loaded for better performance and to reduce size of bundle.
 const HomePage = React.lazy(() => import("./pages/HomePage"));
@@ -39,7 +41,6 @@ function Router() {
       <Suspense fallback={<Loader />}>
         <Switch>
           <Route exact path="/callback" component={Callback} />
-
           {/* Public home/login */}
           <Route
             exact
@@ -48,7 +49,7 @@ function Router() {
               auth.isAuthenticated ? (
                 <HomePage />
               ) : (
-                <button onClick={() => auth.signinRedirect()}>Login</button>
+                    <Welcome/>
               )
             }
           />
@@ -79,7 +80,7 @@ function Router() {
               <Route
                 path="/customers"
                 exact
-                render={() => <CustomerList userInfo={userInfo} />}
+                render={() => <Welcome userInfo={userInfo} />}
               />
             </>
           )}

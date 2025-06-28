@@ -8,7 +8,6 @@ import SideBar from "../../components/SideBar";
 import DashboardComp from "../../components/Dashboard";
 import axios from "axios";
 import Charts from "../Charts";
-// import Fab from "@mui/material/Fab";
 import { Fab, Action } from "react-tiny-fab";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import AddIcon from "@mui/icons-material/Add";
