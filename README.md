@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## TODO
+
+1) create domain in user pool ( add that detail in cloud formation)
+2) Edit managed login page configuration in user pool
+2) create welcome page
+
 ## Available Scripts
 
 In the project directory, you can run:
