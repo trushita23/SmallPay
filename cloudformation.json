@@ -472,7 +472,7 @@
         "Role": {
           "Fn::GetAtt": ["CloudRole", "Arn"]
         },
-        "Runtime": "python3.9",
+        "Runtime": "python3.12",
         "Timeout": 300
       }
     },

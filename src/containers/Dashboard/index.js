@@ -36,6 +36,11 @@ const Dashboard = (props) => {
   };
 
   const { userInfo } = props;
+  console.log("userinfoo in dashboard container....", userInfo);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const fetchData = () => {
     const api = `${BACKEND_URL}/fetchInvoice?userID=${userInfo.email}`;
     axios
@@ -47,9 +52,6 @@ const Dashboard = (props) => {
         console.log(error);
       });
   };
-  if (data.length === 0) {
-    fetchData();
-  }
 
   const paidStatus_count = (type) => {
     let count = 0;
@@ -134,7 +136,7 @@ const Dashboard = (props) => {
       <Grid item xs={12} lg={3}></Grid>
       <Grid item xs={12} lg={9}>
         <Box pl={2} pt={2}>
-          <Charts data={data} />
+          {/* <Charts data={data} /> */}
         </Box>
       </Grid>
       <Grid item xs={12}>
