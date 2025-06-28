@@ -81,7 +81,7 @@ function Router() {
               <Route
                 path="/customers"
                 exact
-                render={() => <Welcome userInfo={userInfo} />}
+                render={() => <CustomerList userInfo={userInfo} />}
               />
             </>
           )}
