@@ -59,7 +59,12 @@ function Welcome() {
                 <Button
                   variant="contained"
                   size="large"
-                  sx={{ bgcolor: "#18ad68", px: 6, fontWeight:800, color: "#ffffff" }}
+                  sx={{
+                    bgcolor: "#18ad68",
+                    px: 6,
+                    fontWeight: 800,
+                    color: "#ffffff",
+                  }}
                   onClick={() => auth.signinRedirect()}
                 >
                   Sign Up
@@ -136,8 +141,8 @@ function Welcome() {
                 Real-time insights. Fewer surprises.
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                Instantly track profits, losses, and customer payments—all from
-                a single dashboard that keeps you informed at a glance.
+                Instantly track profits, losses, and customer payments - all
+                from a single dashboard that keeps you informed at a glance.
               </Typography>
             </Paper>
           </Grid>
