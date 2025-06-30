@@ -10,6 +10,7 @@ import { Menu, MenuItem } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "react-oidc-context";
+import { CLIENT_ID } from "../../config";
 
 export default function NavBarComp(props) {
   const { userInfo } = props;
@@ -25,7 +26,7 @@ export default function NavBarComp(props) {
     if (auth.isAuthenticated) {
       auth.removeUser();
     }
-    const clientId = ""; // Get from AWS console (Cognito)
+    const clientId = CLIENT_ID;
     const logoutUri = "http://localhost:3000";
     const cognitoDomain = "https://smallpay.auth.us-east-2.amazoncognito.com";
     window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(
