@@ -20,8 +20,17 @@ export default function NavBarComp(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
+
   const handleLogout = () => {
-    auth.signoutRedirect();
+    if (auth.isAuthenticated) {
+      auth.removeUser();
+    }
+    const clientId = ""; // Get from AWS console (Cognito)
+    const logoutUri = "http://localhost:3000";
+    const cognitoDomain = "https://smallpay.auth.us-east-2.amazoncognito.com";
+    window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(
+      logoutUri
+    )}`;
   };
 
   const handleLogin = () => {
@@ -106,7 +115,6 @@ export default function NavBarComp(props) {
             )}
           </Box>
         </Toolbar>
-
       </AppBar>
     </Box>
   );

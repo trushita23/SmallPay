@@ -8,6 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Box, Divider } from "@mui/material";
 import axios from "axios";
 import { BACKEND_URL } from "../../config";
+import { useHistory } from "react-router-dom";
 
 export default function AddCustomerComp(props) {
   // const [open, setOpen] = React.useState(false);
@@ -20,7 +21,7 @@ export default function AddCustomerComp(props) {
     address: "",
     creator: "",
   });
-
+  const history = useHistory();
   const { handleClickOpen, handleClose, open } = props;
 
   // const handleClickOpen = () => {
@@ -40,7 +41,7 @@ export default function AddCustomerComp(props) {
         console.log(response);
         alert("Customer Created Successfully");
         handleClose();
-        window.location.reload(false);
+        history.push("/customers");
       })
       .catch((error) => {
         console.log(error);

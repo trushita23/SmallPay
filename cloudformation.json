@@ -92,8 +92,11 @@
           "ALLOW_REFRESH_TOKEN_AUTH",
           "ALLOW_USER_SRP_AUTH"
         ],
-
-        "AllowedOAuthFlowsUserPoolClient": false,
+        "CallbackURLs": ["http://localhost:3000"],
+        "LogoutURLs": ["http://localhost:3000"],
+        "AllowedOAuthFlowsUserPoolClient": true,
+        "AllowedOAuthFlows": ["code"],
+        "AllowedOAuthScopes": ["email", "openid", "phone"],
         "PreventUserExistenceErrors": "ENABLED",
         "EnableTokenRevocation": true
       }
@@ -316,38 +319,6 @@
         "VisibilityTimeout": 300
       }
     },
-    "AddUserLambdaFunction": {
-      "Type": "AWS::Lambda::Function",
-      "Properties": {
-        "FunctionName": "addUser",
-        "Code": {
-          "ZipFile": "const AWS = require(\"aws-sdk\");\n const dynamodb = new AWS.DynamoDB.DocumentClient();\n exports.handler = async (event, context, callback) => {\n const req = JSON.stringify(event);\n const username = event.userName;\n const email = event.request.userAttributes.email;\n const info = { username: username, email: email };\n try {\n await saveUser(info)\n .then(() => {\n callback(null, event);\n })\n .catch((err) => {\n console.log(err);\n callback(null, event);\n });\n } catch (e) {\n return {\n statusCode: 500,\n body: JSON.stringify(e),\n };\n }\n };\n function saveUser(userInfo) {\n const params = {\n TableName: \"User\",\n Item: {\n username: userInfo.username,\n email: userInfo.email,\n },\n };\n return dynamodb.put(params).promise();\n }"
-        },
-        "Description": "Lambda Function to add new users to dynamodb.",
-        "Handler": "index.handler",
-        "Role": {
-          "Fn::GetAtt": ["CloudRole", "Arn"]
-        },
-        "Runtime": "nodejs16.x",
-        "Timeout": 300
-      }
-    },
-    "FetchUserLambdaFunction": {
-      "Type": "AWS::Lambda::Function",
-      "Properties": {
-        "FunctionName": "fetchUser",
-        "Code": {
-          "ZipFile": "const AWS = require(\"aws-sdk\"); // Load the AWS SDK for Node.js\n exports.handler = async (event, context) => {\n const documentClient = new AWS.DynamoDB.DocumentClient();\n let responseBody = \"\";\n let statusCode = 0;\n let userData = {};\n try {\n const params = {\n TableName: \"User\",\n };\n var result = await documentClient.scan(params).promise();\n result.Items.map((item, index) => {\n let dbUsername = item.username;\n let feUsername = event.username;\n let comparedString = dbUsername.localeCompare(feUsername);\n if (comparedString === 0) {\n userData = result.Items[index];\n }\n });\n responseBody = userData;\n statusCode = 200;\n } catch (err) {\n responseBody = `Unable to get User: ${err}`;\n statusCode = 403;\n }\n const response = {\n statusCode: statusCode,\n headers: {\n \"Content-Type\": \"application/json\",\n },\n data: responseBody,\n };\n return response;\n };"
-        },
-        "Description": "Lambda Function to fetch users from dynamodb.",
-        "Handler": "index.handler",
-        "Role": {
-          "Fn::GetAtt": ["CloudRole", "Arn"]
-        },
-        "Runtime": "nodejs16.x",
-        "Timeout": 300
-      }
-    },
     "DeleteCustomerLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -561,54 +532,6 @@
         "Action": "lambda:InvokeFunction",
         "FunctionName": {
           "Fn::GetAtt": ["FetchCustomerLambdaFunction", "Arn"]
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:aws:execute-api:",
-              { "Ref": "AWS::Region" },
-              ":",
-              { "Ref": "AWS::AccountId" },
-              ":",
-              { "Ref": "SmallPayAPI" },
-              "/*"
-            ]
-          ]
-        }
-      }
-    },
-    "AddUserPermission": {
-      "Type": "AWS::Lambda::Permission",
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": ["AddUserLambdaFunction", "Arn"]
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:aws:execute-api:",
-              { "Ref": "AWS::Region" },
-              ":",
-              { "Ref": "AWS::AccountId" },
-              ":",
-              { "Ref": "SmallPayAPI" },
-              "/*"
-            ]
-          ]
-        }
-      }
-    },
-    "FetchUserPermission": {
-      "Type": "AWS::Lambda::Permission",
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": ["FetchUserLambdaFunction", "Arn"]
         },
         "Principal": "apigateway.amazonaws.com",
         "SourceArn": {
@@ -907,8 +830,6 @@
       "DependsOn": [
         "FetchCustomerGetRequest",
         "FetchCustomerOptionsRequest",
-        "FetchUserGetRequest",
-        "FetchUserOptionsRequest",
         "DeleteCustomerGetRequest",
         "DeleteCustomerOptionsRequest",
         "DeleteInvoiceGetRequest",
@@ -946,18 +867,6 @@
           "Fn::GetAtt": ["SmallPayAPI", "RootResourceId"]
         },
         "PathPart": "fetchCustomer"
-      }
-    },
-    "FetchUserResource": {
-      "Type": "AWS::ApiGateway::Resource",
-      "Properties": {
-        "RestApiId": {
-          "Ref": "SmallPayAPI"
-        },
-        "ParentId": {
-          "Fn::GetAtt": ["SmallPayAPI", "RootResourceId"]
-        },
-        "PathPart": "fetchUser"
       }
     },
     "DeleteCustomerResource": {
@@ -1178,124 +1087,6 @@
         },
         "ResourceId": {
           "Ref": "FetchCustomerResource"
-        },
-        "RestApiId": {
-          "Ref": "SmallPayAPI"
-        },
-        "MethodResponses": [
-          {
-            "StatusCode": 200,
-            "ResponseModels": {
-              "application/json": "Empty"
-            },
-            "ResponseParameters": {
-              "method.response.header.Access-Control-Allow-Headers": true,
-              "method.response.header.Access-Control-Allow-Methods": true,
-              "method.response.header.Access-Control-Allow-Origin": true,
-              "method.response.header.Access-Control-Allow-Credentials": true
-            }
-          }
-        ]
-      }
-    },
-    "FetchUserGetRequest": {
-      "Type": "AWS::ApiGateway::Method",
-      "Properties": {
-        "AuthorizationType": "NONE",
-        "HttpMethod": "GET",
-        "Integration": {
-          "Type": "AWS",
-          "IntegrationHttpMethod": "POST",
-          "Uri": {
-            "Fn::Join": [
-              "",
-              [
-                "arn:aws:apigateway:",
-                { "Ref": "AWS::Region" },
-                ":lambda:path/2015-03-31/functions/",
-                { "Fn::GetAtt": ["FetchUserLambdaFunction", "Arn"] },
-                "/invocations"
-              ]
-            ]
-          },
-          "PassthroughBehavior": "WHEN_NO_TEMPLATES",
-          "IntegrationResponses": [
-            {
-              "StatusCode": 200,
-              "ResponseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'*'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Allow-Credentials": "'true'"
-              },
-              "ResponseTemplates": {
-                "application/json": ""
-              }
-            }
-          ],
-          "RequestTemplates": {
-            "application/json": {
-              "Fn::Join": [
-                "",
-                ["{", "\"username\": \"$input.params('username')\"", "}"]
-              ]
-            }
-          }
-        },
-        "RequestParameters": {
-          "method.request.querystring.username": false
-        },
-
-        "ResourceId": {
-          "Ref": "FetchUserResource"
-        },
-
-        "RestApiId": {
-          "Ref": "SmallPayAPI"
-        },
-        "MethodResponses": [
-          {
-            "StatusCode": 200,
-            "ResponseModels": {
-              "application/json": "Empty"
-            },
-            "ResponseParameters": {
-              "method.response.header.Access-Control-Allow-Headers": true,
-              "method.response.header.Access-Control-Allow-Methods": true,
-              "method.response.header.Access-Control-Allow-Origin": true,
-              "method.response.header.Access-Control-Allow-Credentials": true
-            }
-          }
-        ]
-      }
-    },
-    "FetchUserOptionsRequest": {
-      "Type": "AWS::ApiGateway::Method",
-      "Properties": {
-        "AuthorizationType": "NONE",
-        "HttpMethod": "OPTIONS",
-        "Integration": {
-          "Type": "MOCK",
-          "IntegrationResponses": [
-            {
-              "StatusCode": 200,
-              "ResponseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'*'",
-                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Allow-Credentials": "'true'"
-              },
-              "ResponseTemplates": {
-                "application/json": ""
-              }
-            }
-          ],
-          "RequestTemplates": {
-            "application/json": "{\n \"statusCode\": 200\n}"
-          }
-        },
-        "ResourceId": {
-          "Ref": "FetchUserResource"
         },
         "RestApiId": {
           "Ref": "SmallPayAPI"
@@ -1597,8 +1388,8 @@
                 "",
                 [
                   "{",
-                  "\"invoiceNumber\": \"$input.params('invoiceNumber')\"",
-                  "\"paidDate\": \"$util.escapeJavaScript(\"$input.params('paidDate')\")\"",
+                  "\"invoiceNumber\": \"$input.params('invoiceNumber')\",",
+                  "\"paidDate\": \"$util.escapeJavaScript(\\\"$input.params('paidDate')\\\")\"",
                   "}"
                 ]
               ]
