@@ -6,6 +6,7 @@ lambda-codes/**/node_modules
 lambda-codes/*.zip
 /.pnp
 .pnp.js
+src/config.js
 
 # testing
 /coverage
