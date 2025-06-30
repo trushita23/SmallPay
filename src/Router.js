@@ -8,7 +8,6 @@ import { useAuth } from "react-oidc-context";
 import Callback from "./components/Callback";
 import Welcome from "./components/Welcome";
 
-
 //imports are lazy loaded for better performance and to reduce size of bundle.
 const HomePage = React.lazy(() => import("./pages/HomePage"));
 const SpecificInvoicePage = React.lazy(() =>
@@ -31,8 +30,8 @@ function Router() {
   //       .catch((err) => console.error("User fetch failed", err));
   //   }
   // }, [auth.isAuthenticated]);
-  const userInfo = { email: auth.user.profile.email };
-  // const userInfo = { email: "nishitdummy@gmail.com" };
+  // const userInfo = { email: auth.user.profile.email };
+  const userInfo = { email: "nishitdummy@gmail.com" };
 
   if (auth.isLoading) return <Loader />;
 
@@ -46,13 +45,7 @@ function Router() {
           <Route
             exact
             path="/"
-            render={() =>
-              auth.isAuthenticated ? (
-                <HomePage />
-              ) : (
-                    <Welcome/>
-              )
-            }
+            render={() => (auth.isAuthenticated ? <HomePage /> : <Welcome />)}
           />
 
           {/* Protected routes */}

@@ -1,10 +1,14 @@
 import { Box, Grid } from "@mui/material";
+import { Fab, Action } from "react-tiny-fab";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import AddIcon from "@mui/icons-material/Add";
 import React, { useEffect, useState } from "react";
 import InvoiceListComp from "../../components/InvoiceList";
 import SideBar from "../../components/SideBar";
 import NavBar from "../NavBar";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import AddCustomerComp from "../../components/AddCustomer";
 import { BACKEND_URL } from "../../config";
 
 const InvoiceList = (props) => {
@@ -14,6 +18,15 @@ const InvoiceList = (props) => {
   const [deleteRes, setDeleteRes] = useState("");
   const [editRes, setEditRes] = useState("");
   const history = useHistory();
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const fetchData = () => {
     const api = `${BACKEND_URL}/fetchInvoice?userID=${userInfo.email}`;
     axios
@@ -79,6 +92,28 @@ const InvoiceList = (props) => {
           />
         </Box>
       </Grid>
+      <Grid item xs={12}>
+        <AddCustomerComp
+          open={open}
+          handleClickOpen={handleClickOpen}
+          handleClose={handleClose}
+          userInfo={userInfo}
+        />
+      </Grid>
+      <Fab
+        // sx={{ position: "fixed", bottom: "50px", right: "20px" }}
+        // size="small"
+        // color="primary"
+        // aria-label="add"
+        mainButtonStyles={{ backgroundColor: "#3fb551" }}
+        color="primary"
+        icon={<AddIcon />}
+        alwaysShowTitle={true}
+      >
+        <Action text="New customer" onClick={handleClickOpen}>
+          <PersonAddIcon />
+        </Action>
+      </Fab>
     </Grid>
   );
 };

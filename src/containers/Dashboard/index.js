@@ -136,7 +136,7 @@ const Dashboard = (props) => {
       <Grid item xs={12} lg={3}></Grid>
       <Grid item xs={12} lg={9}>
         <Box pl={2} pt={2}>
-          {/* <Charts data={data} /> */}
+          <Charts data={data} />
         </Box>
       </Grid>
       <Grid item xs={12}>
@@ -152,7 +152,7 @@ const Dashboard = (props) => {
         // size="small"
         // color="primary"
         // aria-label="add"
-        mainButtonStyles={{ backgroundColor: "#3f51b5" }}
+        mainButtonStyles={{ backgroundColor: "#3fb551" }}
         color="primary"
         icon={<AddIcon />}
         alwaysShowTitle={true}

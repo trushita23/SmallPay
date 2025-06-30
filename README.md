@@ -4,9 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## TODO
 
-1) create domain in user pool ( add that detail in cloud formation)
-2) Edit managed login page configuration in user pool
-2) create welcome page
+1. cognito (Managed login pages configuration, Managed login style - new) & editpayment api gateway (, added) - (add that detail in cloudformation if possible)
+2. Edit managed login page configuration in user pool & figure out log out options as well!
 
 ## Available Scripts
 

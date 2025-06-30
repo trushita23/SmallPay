@@ -3,9 +3,9 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import ButtonBase from "@mui/material/ButtonBase";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import { Menu, MenuItem } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import { useHistory } from "react-router-dom";
@@ -79,18 +79,28 @@ export default function NavBarComp(props) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+          <ButtonBase
+            disableRipple
+            onClick={() => history.push("/dashboard")}
+            sx={{
+              flexGrow: 1,
+              textAlign: "left",
+              color: "inherit",
+              textTransform: "none",
+              padding: 0,
+              minWidth: 0,
+              "&:hover": {
+                backgroundColor: "transparent",
+              },
+              "&:active": {
+                backgroundColor: "transparent",
+              },
+            }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            SmallPay
-          </Typography>
+            <Typography variant="h6" component="div">
+              SmallPay
+            </Typography>
+          </ButtonBase>
           <Button color="inherit">
             {userId ? (
               displayUserAvatar()
