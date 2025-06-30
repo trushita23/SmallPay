@@ -28,7 +28,9 @@
     "react-oidc-context": "^3.3.0",
     "react-router-dom": "^5.3.4",
     "react-scripts": "^5.0.1",
+    "react-slick": "^0.30.3",
     "react-tiny-fab": "^4.0.4",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.19",
     "web-vitals": "^5.0.3"
   },

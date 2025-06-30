@@ -36,7 +36,6 @@ const Dashboard = (props) => {
   };
 
   const { userInfo } = props;
-  console.log("userinfoo in dashboard container....", userInfo);
   useEffect(() => {
     fetchData();
   }, []);

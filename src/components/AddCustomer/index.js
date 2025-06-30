@@ -11,9 +11,7 @@ import { BACKEND_URL } from "../../config";
 import { useHistory } from "react-router-dom";
 
 export default function AddCustomerComp(props) {
-  // const [open, setOpen] = React.useState(false);
   const userInfo = props.userInfo;
-  console.log("userInfo on addcustomer.....", userInfo.email);
   const [clientData, setClientData] = useState({
     name: "",
     email: "",
@@ -38,7 +36,6 @@ export default function AddCustomerComp(props) {
     axios
       .post(api, { ...clientData, creator: `${userInfo.email}` })
       .then((response) => {
-        console.log(response);
         alert("Customer Created Successfully");
         handleClose();
         history.push("/customers");
