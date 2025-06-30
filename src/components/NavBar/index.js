@@ -15,7 +15,7 @@ export default function NavBarComp(props) {
   const { userInfo } = props;
   const auth = useAuth();
 
-  const userId = userInfo ? userInfo.username : "";
+  const userId = userInfo ? userInfo.email : "";
   const history = useHistory();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
