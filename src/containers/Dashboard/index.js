@@ -148,7 +148,7 @@ const Dashboard = (props) => {
             >
               <DashboardComp data={dataReport} />
               <Box mt={4}>
-              <Charts data={data} />
+                <Charts data={data} />
               </Box>
             </Box>
           </Box>
@@ -165,7 +165,7 @@ const Dashboard = (props) => {
       </Grid>
 
       <Fab
-        mainButtonStyles={{ backgroundColor: "#3f51b5" }}
+        mainButtonStyles={{ backgroundColor: "#3fb551" }}
         color="primary"
         icon={<AddIcon />}
         alwaysShowTitle={true}
@@ -176,7 +176,6 @@ const Dashboard = (props) => {
       </Fab>
     </>
   );
-
 };
 
 export default Dashboard;

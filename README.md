@@ -4,8 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## TODO
 
-1. cognito (Managed login pages configuration, Managed login style - new) & editpayment api gateway (, added) - (add that detail in cloudformation if possible)
-2. Edit managed login page configuration in user pool & figure out log out options as well!
+MAKE THE README BEAUTIFUL AND DENSE NOW!!!
+FYI: AWS CloudFormation does not directly expose a property to configure the "Managed UI - Login Style" (i.e., "New" vs. "Classic") for Cognito User Pools or User Pool Clients.
+This setting is specific to the Cognito Hosted UI, and the "New" login style is part of Cognito’s modernized Hosted UI experience, which is enabled by default for newer user pools but not something you can explicitly toggle via CloudFormation as of now. (We will make a note of this in README)
 
 ## Available Scripts
 

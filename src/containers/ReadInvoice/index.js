@@ -30,7 +30,7 @@ const ReadInvoice = (props) => {
   }, []);
 
   const fetchData = () => {
-    const api = `${BACKEND_URL}/fetchInvoice?userID=${userInfo.email}`;
+    const api = `${BACKEND_URL}/fetchParticularInvoice?invoiceNumber=${invoiceNumber}`;
     axios
       .get(api)
       .then((response) => {
