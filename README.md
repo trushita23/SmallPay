@@ -190,6 +190,9 @@ S3 Event → sendEmailPdf Lambda → Email Delivery
 | **Amazon S3**       | File storage              | Event trigger for email functions (planned) | Object events  |
 | **Amazon SQS**      | Async processing          | Queue trigger for PDF generation (planned)  | Message events |
 
+> **Note:** AWS CloudFormation does not directly expose a property to configure the "Managed UI - Login Style" (i.e., "New" vs. "Classic") for Cognito User Pools or User Pool Clients.
+> This setting is specific to the Cognito Hosted UI, and the "New" login style is part of Cognito’s modernized Hosted UI experience, which is enabled by default for newer user pools but not something you can explicitly toggle via CloudFormation as of now.
+
 ### Detailed Lambda Functions
 
 #### **Invoice Management Functions (6 Functions)**
