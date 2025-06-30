@@ -73,52 +73,12 @@ const ReadInvoice = (props) => {
       });
   };
 
-  const handleDownload = (invoiceNumber) => {
-    axios
-      .post(`${BACKEND_URL}/savePDF`, {
-        invoiceNumber: invoiceNumber,
-      })
-      .then((res) => {
-        setTimeout(function () {
-          axios
-            .get(`${BACKEND_URL}/PDFreturn?invoiceNumber=${invoiceNumber}`, {
-              responseType: "blob",
-            })
-            .then((response) => {
-              const pdfBlob = new Blob([response.data], {
-                type: "application/pdf",
-              });
-              saveAs(pdfBlob, "invoice.pdf");
-              setDownload(response.data.data);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }, 3000);
-      });
-  };
-
-  const handleEmail = (clientInfo) => {
-    axios
-      .post(`${BACKEND_URL}/sendEmail`, clientInfo)
-      .then((response) => {
-        console.log(response);
-        alert("Email Sent Successfully");
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Error in Sending Email");
-      });
-  };
-
   return (
     <>
       <ReadInvoiceComp
         data={data}
         handleDelete={handleDelete}
         handlePayment={handlePayment}
-        handleDownload={handleDownload}
-        handleEmail={handleEmail}
       />
     </>
   );

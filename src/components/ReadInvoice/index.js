@@ -46,14 +46,6 @@ const ReadInvoiceComp = (props) => {
     props.handlePayment(invoiceNumber);
   };
 
-  const handleDownload = (invoiceNumber) => {
-    props.handleDownload(invoiceNumber);
-  };
-
-  const handleEmail = (data) => {
-    props.handleEmail(data);
-  };
-
   const displayTable = () => {
     return (
       <Box pl={3} pr={3} pt={3}>
@@ -149,19 +141,6 @@ const ReadInvoiceComp = (props) => {
             onClick={(e) => handlePayment(data.invoiceNumber)}
           >
             Record Payment
-          </Button>
-        </Box>
-        <Box pt={2} pr={10}>
-          <Button
-            variant="outlined"
-            onClick={(e) => handleDownload(data.invoiceNumber)}
-          >
-            Download Invoice
-          </Button>
-        </Box>
-        <Box pt={2}>
-          <Button variant="outlined" onClick={(e) => handleEmail(data)}>
-            Send Invoice in Email
           </Button>
         </Box>
       </Box>
