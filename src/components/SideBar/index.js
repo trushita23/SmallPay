@@ -28,7 +28,6 @@ export default function SideBar() {
     <Paper elevation={2} sx={{ height: "100%" }}>
       <List
         sx={{ width: "100%", bgcolor: "background.paper" }}
-        className={classes.root}
       >
         {["Dashboard", "All Invoices", "Create Invoice", "Customers"].map(
           (text, index) => (
@@ -37,6 +36,8 @@ export default function SideBar() {
               disablePadding
               sx={{ display: "block" }}
               onClick={() => handleClick(index)}
+        className={classes.root}
+
             >
               <ListItemButton
                 sx={{

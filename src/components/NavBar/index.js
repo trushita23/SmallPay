@@ -78,30 +78,25 @@ export default function NavBarComp(props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
-          <ButtonBase
-            disableRipple
-            onClick={() => history.push("/dashboard")}
-            sx={{
-              flexGrow: 1,
-              textAlign: "left",
-              color: "inherit",
-              textTransform: "none",
-              padding: 0,
-              minWidth: 0,
-              "&:hover": {
-                backgroundColor: "transparent",
-              },
-              "&:active": {
-                backgroundColor: "transparent",
-              },
-            }}
-          >
-            <Typography variant="h6" component="div">
-              SmallPay
-            </Typography>
-          </ButtonBase>
-          <Button color="inherit">
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <ButtonBase
+              disableRipple
+              onClick={() => history.push("/dashboard")}
+              sx={{
+                color: "inherit",
+                textTransform: "none",
+                padding: 0,
+                minWidth: 0,
+              }}
+            >
+              <Typography variant="h5" component="div" color="white">
+                SmallPay
+              </Typography>
+            </ButtonBase>
+          </Box>
+
+          <Box>
             {userId ? (
               displayUserAvatar()
             ) : (
@@ -109,8 +104,9 @@ export default function NavBarComp(props) {
                 <Typography color="white">Log In</Typography>
               </Button>
             )}
-          </Button>
+          </Box>
         </Toolbar>
+
       </AppBar>
     </Box>
   );

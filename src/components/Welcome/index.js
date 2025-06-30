@@ -59,10 +59,10 @@ function Welcome() {
                 <Button
                   variant="contained"
                   size="large"
-                  sx={{ bgcolor: "#18ad68", px: 6 }}
+                  sx={{ bgcolor: "#18ad68", px: 6, fontWeight:800, color: "#ffffff" }}
                   onClick={() => auth.signinRedirect()}
                 >
-                  Sign Up Now
+                  Sign Up
                 </Button>
               </Box>
             </Grid>

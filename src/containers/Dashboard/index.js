@@ -121,38 +121,51 @@ const Dashboard = (props) => {
   }
 
   return (
-    <Grid container>
-      <Grid item xs={12}>
-        <NavBar userInfo={userInfo} />
+    <>
+      <NavBar userInfo={userInfo} />
+
+      <Grid container>
+        <Grid item xs={12}>
+          <Box display="flex" minHeight="100vh">
+            {/* Sidebar */}
+            <Box
+              sx={{
+                width: { xs: "100%", lg: "25%" },
+                bgcolor: "#f5f5f5",
+                minHeight: "100vh",
+              }}
+            >
+              <SideBar />
+            </Box>
+
+            {/* Main Content: Dashboard + Charts */}
+            <Box
+              sx={{
+                flexGrow: 1,
+                p: 2,
+                width: { xs: "100%", lg: "75%" },
+              }}
+            >
+              <DashboardComp data={dataReport} />
+              <Box mt={4}>
+              <Charts data={data} />
+              </Box>
+            </Box>
+          </Box>
+        </Grid>
+
+        <Grid item xs={12}>
+          <AddCustomerComp
+            open={open}
+            handleClickOpen={handleClickOpen}
+            handleClose={handleClose}
+            userInfo={userInfo}
+          />
+        </Grid>
       </Grid>
-      <Grid item xs={12} lg={3}>
-        <SideBar />
-      </Grid>
-      <Grid item xs={12} lg={9}>
-        <Box pl={2} pt={2}>
-          <DashboardComp data={dataReport} />
-        </Box>
-      </Grid>
-      <Grid item xs={12} lg={3}></Grid>
-      <Grid item xs={12} lg={9}>
-        <Box pl={2} pt={2}>
-          <Charts data={data} />
-        </Box>
-      </Grid>
-      <Grid item xs={12}>
-        <AddCustomerComp
-          open={open}
-          handleClickOpen={handleClickOpen}
-          handleClose={handleClose}
-          userInfo={userInfo}
-        />
-      </Grid>
+
       <Fab
-        // sx={{ position: "fixed", bottom: "50px", right: "20px" }}
-        // size="small"
-        // color="primary"
-        // aria-label="add"
-        mainButtonStyles={{ backgroundColor: "#3fb551" }}
+        mainButtonStyles={{ backgroundColor: "#3f51b5" }}
         color="primary"
         icon={<AddIcon />}
         alwaysShowTitle={true}
@@ -161,8 +174,9 @@ const Dashboard = (props) => {
           <PersonAddIcon />
         </Action>
       </Fab>
-    </Grid>
+    </>
   );
+
 };
 
 export default Dashboard;
