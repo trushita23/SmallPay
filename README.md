@@ -5,7 +5,6 @@
 [![API Gateway](https://img.shields.io/badge/API%20Gateway-REST-yellow.svg)](https://aws.amazon.com/api-gateway/)
 [![DynamoDB](https://img.shields.io/badge/DynamoDB-NoSQL-red.svg)](https://aws.amazon.com/dynamodb/)
 [![CloudFormation](https://img.shields.io/badge/CloudFormation-IaC-purple.svg)](https://aws.amazon.com/cloudformation/)
-[![Docker](https://img.shields.io/badge/Docker-Containerized-blue.svg)](https://www.docker.com/)
 [![Material-UI](https://img.shields.io/badge/Material--UI-5.0-blue.svg)](https://mui.com/)
 [![Serverless](https://img.shields.io/badge/Architecture-Serverless-green.svg)](https://aws.amazon.com/serverless/)
 
@@ -15,9 +14,40 @@ SmallPay is a **comprehensive serverless invoice management system** designed sp
 
 **🎯 Key Innovation**: Complete serverless architecture utilizing **12 AWS Lambda functions** with sophisticated trigger mechanisms, delivering enterprise-grade functionality at startup costs.
 
-**🎥 Demo Video**: [Watch SmallPay in Action](https://www.youtube.com/watch?v=2Eh-UFvCwYM&ab_channel=Trushita)  
-**📞 Live Demo**: [SmallPay Application](https://smallpay-app.elasticbeanstalk.com)  
+**🎥 Demo Video**: [Watch SmallPay in Action](https://www.youtube.com/watch?v=2Eh-UFvCwYM&ab_channel=Trushita)
+
 **🔗 Source Code**: [GitHub Repository](https://github.com/trushita23/SmallPay)
+
+## 🛠️ Quick Start Guide
+
+### Local Development
+
+```bash
+# Clone the repository
+git clone https://github.com/trushita23/SmallPay.git
+cd SmallPay
+
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+```
+
+The application will be available at `http://localhost:3000`
+
+> **Note:** We are currently unable to host the application live, as deploying it using Elastic Beanstalk, ECR, S3, and VPC incurs charges beyond our AWS free tier limits. However, the complete deployment setup is included in the CloudFormation templates for your review.
+
+### Configuration Required
+
+Before running the application, update these configuration files:
+
+#### 1. Backend API Configuration
+
+**File: `src/config.js`**
+
+- Update `CLIENT_ID` with your Amazon Cognito Client ID.
+  > **Note:** Cognito credentials will be provided in a separate file via the Devpost submission form. Use these credentials to run the application without any issues!
 
 ## 🖼️ Application Preview
 
@@ -36,7 +66,7 @@ _Streamlined invoice creation with professional templates_
 ![Architecture Diagram](src/images/quick-architecture-diagram.png)
 _Comprehensive serverless architecture overview_
 
-_Note_: The red boxes in the architecture diagram highlight upcoming features for PDF generation and email automation. The backend Lambda functions, SQS queues, and S3 storage logic have been created and are ready for frontend integration.
+> **Note**: The red boxes in the architecture diagram highlight upcoming features for PDF generation and email automation. The backend Lambda functions, SQS queues, and S3 storage logic have been created and are ready for frontend integration.
 
 ## 🎯 Problem Statement & Solution
 
@@ -44,7 +74,7 @@ _Note_: The red boxes in the architecture diagram highlight upcoming features fo
 
 Small businesses face critical pain points in invoice management:
 
-- **Manual Processes**: 73% of SMBs still use spreadsheets for invoicing
+- **Manual Processes**: Many SMBs still use spreadsheets for invoicing
 - **Cash Flow Issues**: Poor payment tracking leads to 60-day average payment delays
 - **Scalability Problems**: Traditional solutions require expensive infrastructure investment
 - **Professional Image**: Inconsistent invoicing damages business credibility
@@ -304,52 +334,7 @@ S3 Event → sendEmailPdf Lambda → Email Delivery
 - **📊 Invoice Analytics**: Complete lifecycle metrics and trends
 - **👥 Customer Insights**: Payment behavior and history analysis
 
-## 🛠️ Quick Start Guide
-
-### Local Development
-
-```bash
-# Clone the repository
-git clone https://github.com/trushita23/SmallPay.git
-cd SmallPay
-
-# Install dependencies
-npm install
-
-# Start development server
-npm start
-```
-
-The application will be available at `http://localhost:3000`
-
-### Configuration Required
-
-Before running the application, update these configuration files:
-
-#### 1. AWS Cognito Configuration
-
-**File: `src/config/OidcProviderWrapper.js`**
-
-- Update Cognito User Pool settings
-- Configure OAuth client credentials
-- Set callback URLs for authentication
-
-#### 2. Navigation Authentication Settings
-
-**File: `src/components/NavBar/index.js`**
-
-- Configure Cognito sign-out settings
-- Update authentication flow parameters
-
-#### 3. Backend API Configuration
-
-**File: `src/config/index.js`**
-
-- Update `BACKEND_URL` with your API Gateway endpoint
-- Configure AWS region settings
-- Set environment-specific variables
-
-### Infrastructure Deployment
+## Infrastructure Deployment
 
 ```bash
 # Deploy complete AWS infrastructure
@@ -426,20 +411,10 @@ Access to fetch at 'API_URL' from origin 'http://localhost:3000' has been blocke
 
 ### Scalability Achievements
 
-- **🔄 Auto-scaling**: 0 to 1000+ concurrent Lambda executions
-- **💾 Database Performance**: DynamoDB on-demand scaling
-- **🌍 Global Reach**: Multi-region deployment capability
-- **📈 Cost Efficiency**: 80% cost reduction vs traditional architecture
-
-## 📈 Business Impact & ROI
-
-### Quantifiable Benefits
-
-- **80% Infrastructure Cost Reduction**: Serverless vs traditional hosting
-- **99.99% Uptime**: AWS-guaranteed availability
-- **<200ms Response Times**: Optimized Lambda performance
-- **40% Faster Payment Collection**: Automated tracking reduces payment delays
-- **90% Time Savings**: Reduction in manual invoice processing
+- **Auto-scaling**: 0 to 1000+ concurrent Lambda executions
+- **Database Performance**: DynamoDB on-demand scaling
+- **Global Reach**: Multi-region deployment capability
+- **Cost Efficiency**: 80% cost reduction vs traditional architecture
 
 ## 🎯 Future Enhancements
 
@@ -540,5 +515,3 @@ GET  /PDFReturn              - Retrieve generated PDF from S3
 **🚀 Built with ❤️ using AWS Serverless Technologies**
 
 _SmallPay - Empowering small businesses with enterprise-grade serverless solutions_
-
-**📊 Architecture**: 12 AWS Lambda Functions + API Gateway + DynamoDB + CloudFormation
