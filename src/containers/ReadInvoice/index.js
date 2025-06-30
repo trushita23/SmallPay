@@ -8,7 +8,6 @@ import { BACKEND_URL } from "../../config";
 
 const ReadInvoice = (props) => {
   const userInfo = props.userInfo;
-  console.log("userinfo....", userInfo);
   const invoiceNumber = props.invoiceNumber;
   const [data, setData] = useState({});
   const [deleteRes, setDeleteRes] = useState("");

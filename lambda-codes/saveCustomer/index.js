@@ -6,7 +6,6 @@ exports.handler = async (event, context, callback) => {
   const req = JSON.stringify(event);
   const customerInfo = JSON.parse(req);
   let datetime = Date.now();
-  console.log("req in saveCustomer....", req);
   let responseBody = "";
   let statusCode = 0;
 

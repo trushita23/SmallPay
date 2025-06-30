@@ -49,7 +49,6 @@ const InvoiceListComp = (props) => {
   const classes = useStyles();
   const handleViewInvoice = (invoiceNumber) => {
     props.handleViewInvoice(invoiceNumber);
-    console.log("invoice number", invoiceNumber);
   };
 
   const handleDelete = (invoiceNumber) => {

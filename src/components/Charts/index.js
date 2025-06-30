@@ -7,7 +7,6 @@ import chartTransformation from "./transformation";
 
 const ChartsComp = (props) => {
   const data = props.data;
-  console.log("data in charts....", data);
   const [options, setOptions] = useState(chartOptions);
   let chartConfig = {};
   useEffect(() => {

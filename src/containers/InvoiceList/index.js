@@ -101,10 +101,6 @@ const InvoiceList = (props) => {
         />
       </Grid>
       <Fab
-        // sx={{ position: "fixed", bottom: "50px", right: "20px" }}
-        // size="small"
-        // color="primary"
-        // aria-label="add"
         mainButtonStyles={{ backgroundColor: "#3fb551" }}
         color="primary"
         icon={<AddIcon />}
