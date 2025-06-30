@@ -16,7 +16,7 @@ const options = {
   yAxis: {
     min: 0,
     title: {
-      text: "Payment",
+      text: "Payment Amount ($)",
     },
   },
 

@@ -232,32 +232,6 @@
         ]
       }
     },
-    "UserTable": {
-      "Type": "AWS::DynamoDB::Table",
-      "Properties": {
-        "TableName": "User",
-        "AttributeDefinitions": [
-          {
-            "AttributeName": "email",
-            "AttributeType": "S"
-          }
-        ],
-        "KeySchema": [
-          {
-            "AttributeName": "email",
-            "KeyType": "HASH"
-          }
-        ],
-        "TimeToLiveSpecification": {
-          "AttributeName": "ExpirationTime",
-          "Enabled": true
-        },
-        "ProvisionedThroughput": {
-          "ReadCapacityUnits": "10",
-          "WriteCapacityUnits": "10"
-        }
-      }
-    },
     "CustomerTable": {
       "Type": "AWS::DynamoDB::Table",
       "Properties": {
@@ -282,8 +256,7 @@
           "ReadCapacityUnits": "10",
           "WriteCapacityUnits": "10"
         }
-      },
-      "DependsOn": ["UserTable"]
+      }
     },
     "InvoiceTable": {
       "Type": "AWS::DynamoDB::Table",

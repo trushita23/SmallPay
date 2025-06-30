@@ -16,7 +16,7 @@ const DashboardComp = (props) => {
   const status = [
     { label: "Payment Received", bColor: "" },
     { label: "Pending Amount", bColor: "" },
-    { label: "Overdue", bColor: "" },
+    { label: "Overdue Amount", bColor: "" },
     { label: "Total Invoices", bColor: "" },
     { label: "Unpaid Invoices", bColor: "" },
     { label: "Total Amount", bColor: "" },
