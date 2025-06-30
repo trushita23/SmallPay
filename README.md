@@ -36,6 +36,8 @@ _Streamlined invoice creation with professional templates_
 ![Architecture Diagram](src/images/quick-architecture-diagram.png)
 _Comprehensive serverless architecture overview_
 
+_Note_: The red boxes in the architecture diagram highlight upcoming features for PDF generation and email automation. The backend Lambda functions, SQS queues, and S3 storage logic have been created and are ready for frontend integration.
+
 ## 🎯 Problem Statement & Solution
 
 ### The Challenge
