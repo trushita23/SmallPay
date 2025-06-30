@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     "&:hover": {
       cursor: "pointer",
+      backgroundColor: theme.palette.primary.light,
     },
   },
 }));
